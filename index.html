@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCT-100 过程控制终端</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1d24;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .header {
+            background: #252a33;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #5b9bd5;
+        }
+
+        .device-name {
+            font-size: 0.95rem;
+            color: #888;
+        }
+
+        .status-dots {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status-dot {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .dot.green {
+            background: #00ff88;
+            box-shadow: 0 0 10px #00ff88;
+        }
+
+        .dot.red {
+            background: #ff4757;
+            box-shadow: 0 0 10px #ff4757;
+        }
+
+        .status-text {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .device-label {
+            background: #333;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 15px;
+            height: calc(100vh - 56px);
+        }
+
+        .panel {
+            background: #252a33;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            padding: 12px 15px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #5b9bd5;
+        }
+
+        .panel-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 5px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #5b9bd5;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #4a8bc5;
+        }
+
+        .btn-secondary {
+            background: #3a4149;
+            color: #aaa;
+        }
+
+        .btn-secondary:hover {
+            background: #4a5159;
+        }
+
+        .btn.active {
+            background: #5b9bd5;
+            color: #fff;
+        }
+
+        .panel-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .sensor-card {
+            background: #1a1d24;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .sensor-label {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #5b9bd5;
+            margin-bottom: 5px;
+        }
+
+        .sensor-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .sensor-unit {
+            font-size: 1rem;
+            color: #888;
+            margin-left: 4px;
+        }
+
+        .sensor-name {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .threshold-section {
+            margin-top: 20px;
+        }
+
+        .threshold-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .threshold-row:last-child {
+            border-bottom: none;
+        }
+
+        .threshold-label {
+            font-size: 0.85rem;
+            color: #888;
+            width: 70px;
+        }
+
+        .current-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #00ff88;
+            min-width: 80px;
+        }
+
+        .threshold-input-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex: 1;
+        }
+
+        .threshold-input {
+            background: #1a1d24;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 6px 10px;
+            color: #fff;
+            font-size: 0.9rem;
+            width: 70px;
+            text-align: center;
+        }
+
+        .threshold-input:focus {
+            outline: none;
+            border-color: #5b9bd5;
+        }
+
+        .arrow-btn {
+            background: #333;
+            border: none;
+            border-radius: 4px;
+            color: #888;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1px;
+        }
+
+        .arrow-btn:hover {
+            background: #444;
+        }
+
+        .arrow-btn span {
+            font-size: 0.6rem;
+        }
+
+        .actuator-section {
+            margin-bottom: 20px;
+        }
+
+        .valve-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: #1a1d24;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .valve-label {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .valve-state {
+            background: #00ff88;
+            color: #1a1d24;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .actuator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .actuator-card {
+            background: #1a1d24;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .actuator-icon {
+            font-size: 4rem;
+            opacity: 0.7;
+        }
+
+        .actuator-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .actuator-relay {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .actuator-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            cursor: pointer;
+        }
+
+        .actuator-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .actuator-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #3a4149;
+            border-radius: 14px;
+            transition: 0.3s;
+        }
+
+        .actuator-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background: #666;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        input:checked + .actuator-slider {
+            background: #5b9bd5;
+        }
+
+        input:checked + .actuator-slider:before {
+            transform: translateX(22px);
+            background: #fff;
+        }
+
+        .auto-hint {
+            background: #333;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .auto-hint-text {
+            font-size: 0.8rem;
+            color: #ffc107;
+        }
+
+        .footer {
+            background: #252a33;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #333;
+        }
+
+        .log-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .log-label {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .log-count {
+            background: #5b9bd5;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            color: #fff;
+        }
+
+        .footer-switch {
+            position: relative;
+            width: 45px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .footer-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .footer-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #3a4149;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .footer-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: #666;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        input:checked + .footer-slider {
+            background: #5b9bd5;
+        }
+
+        input:checked + .footer-slider:before {
+            transform: translateX(21px);
+            background: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sensor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actuator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .threshold-row {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="logo">PCT-100</div>
+            <div class="device-name">化工过程控制实训装置</div>
+            <div class="status-dots">
+                <div class="status-dot">
+                    <div class="dot green"></div>
+                    <span class="status-text">MQTT</span>
+                </div>
+                <div class="status-dot">
+                    <div class="dot red"></div>
+                    <span class="status-text">设备</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <span class="device-label">设备 PCT_100_888</span>
+            <label class="footer-switch">
+                <input type="checkbox" id="mqtt-switch" checked>
+                <span class="footer-slider"></span>
+            </label>
+            <span class="device-label">连接MQTT平台</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="panel">
+            <div class="panel-header">
+                <span class="panel-title">传感器数据</span>
+                <div class="panel-actions">
+                    <button class="btn btn-primary active" id="server-outside">外网</button>
+                    <button class="btn btn-secondary" id="server-inside">内网</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="sensor-grid">
+                    <div class="sensor-card">
+                        <div class="sensor-label">T</div>
+                        <div>
+                            <span class="sensor-value" id="temp-value">26.9</span>
+                            <span class="sensor-unit">°C</span>
+                        </div>
+                        <div class="sensor-name">温度 DS18B20</div>
+                    </div>
+                    <div class="sensor-card">
+                        <div class="sensor-label">L</div>
+                        <div>
+                            <span class="sensor-value" id="light-value">492</span>
+                            <span class="sensor-unit">Lux</span>
+                        </div>
+                        <div class="sensor-name">光照 GL5516</div>
+                    </div>
+                </div>
+
+                <div class="threshold-section">
+                    <div class="panel-title" style="margin-bottom: 15px; font-size: 0.85rem;">阈值设置</div>
+                    <div class="threshold-row">
+                        <span class="threshold-label">当前</span>
+                        <span class="current-value" id="temp-current">28 °C</span>
+                        <span class="threshold-label">温度阈值</span>
+                        <div class="threshold-input-group">
+                            <input type="number" class="threshold-input" id="temp-threshold" value="30" min="0" max="100">
+                            <label class="arrow-btn">
+                                <span>▲</span>
+                                <span>▼</span>
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" id="temp-submit">下发</button>
+                    </div>
+                    <div class="threshold-row">
+                        <span class="threshold-label">当前</span>
+                        <span class="current-value" id="light-current">300 Lux</span>
+                        <span class="threshold-label">光照阈值</span>
+                        <div class="threshold-input-group">
+                            <input type="number" class="threshold-input" id="light-threshold" value="302" min="0" max="1000">
+                            <label class="arrow-btn">
+                                <span>▲</span>
+                                <span>▼</span>
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" id="light-submit">下发</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">
+                <span class="panel-title">执行器控制</span>
+                <div class="panel-actions">
+                    <button class="btn btn-primary active" id="mode-auto">自动</button>
+                    <button class="btn btn-secondary" id="mode-manual">手动</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="valve-status">
+                    <span class="valve-label">总阀</span>
+                    <span class="valve-state">闭合</span>
+                </div>
+
+                <div class="actuator-grid">
+                    <div class="actuator-card">
+                        <div class="actuator-icon">💡</div>
+                        <div class="actuator-name">灯光</div>
+                        <div class="actuator-relay">继电器3</div>
+                        <label class="actuator-switch">
+                            <input type="checkbox" id="light-switch">
+                            <span class="actuator-slider"></span>
+                        </label>
+                    </div>
+                    <div class="actuator-card">
+                        <div class="actuator-icon">🌀</div>
+                        <div class="actuator-name">风扇</div>
+                        <div class="actuator-relay">继电器4</div>
+                        <label class="actuator-switch">
+                            <input type="checkbox" id="fan-switch">
+                            <span class="actuator-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="auto-hint">
+                    <span class="auto-hint-text">自动模式下执行器由设备自动控制</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="log-section">
+            <span class="log-label">调试日志</span>
+            <span class="log-count" id="log-count">2284</span>
+        </div>
+        <label class="footer-switch">
+            <input type="checkbox" id="log-switch">
+            <span class="footer-slider"></span>
+        </label>
+    </div>
+
+    <script>
+        function updateValue(elementId, min, max, decimals = 1) {
+            const element = document.getElementById(elementId);
+            const newValue = parseFloat((Math.random() * (max - min) + min).toFixed(decimals));
+            element.textContent = newValue.toFixed(decimals);
+            return newValue;
+        }
+
+        setInterval(() => {
+            updateValue('temp-value', 20, 35, 1);
+            updateValue('light-value', 100, 800, 0);
+        }, 3000);
+
+        const serverBtns = document.querySelectorAll('#server-outside, #server-inside');
+        serverBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                serverBtns.forEach(b => b.classList.remove('active', 'btn-primary'));
+                serverBtns.forEach(b => b.classList.add('btn-secondary'));
+                this.classList.add('active', 'btn-primary');
+                this.classList.remove('btn-secondary');
+            });
+        });
+
+        const modeBtns = document.querySelectorAll('#mode-auto, #mode-manual');
+        const actuatorSwitches = document.querySelectorAll('.actuator-switch input');
+        
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modeBtns.forEach(b => b.classList.remove('active', 'btn-primary'));
+                modeBtns.forEach(b => b.classList.add('btn-secondary'));
+                this.classList.add('active', 'btn-primary');
+                this.classList.remove('btn-secondary');
+                
+                const isAuto = this.id === 'mode-auto';
+                actuatorSwitches.forEach(sw => {
+                    sw.disabled = isAuto;
+                    sw.parentElement.style.opacity = isAuto ? 0.5 : 1;
+                });
+            });
+        });
+
+        const submitBtns = document.querySelectorAll('#temp-submit, #light-submit');
+        submitBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const thresholdId = this.id.replace('-submit', '-threshold');
+                const value = document.getElementById(thresholdId).value;
+                console.log(`${thresholdId}: ${value}`);
+            });
+        });
+
+        const mqttSwitch = document.getElementById('mqtt-switch');
+        mqttSwitch.addEventListener('change', function() {
+            console.log('MQTT连接:', this.checked ? '已连接' : '已断开');
+        });
+    </script>
+</body>
+</html>
