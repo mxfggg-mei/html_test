@@ -18,12 +18,22 @@
             min-height: 100vh;
             color: #fff;
             overflow: hidden;
-            zoom: 50%;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            height: 100vh;
+            background: #1a1d24;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         .header {
             background: #252a33;
-            padding: 12px 20px;
+            padding: 8px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -33,42 +43,42 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 12px;
         }
 
         .logo {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #5b9bd5;
         }
 
         .device-name {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             color: #888;
         }
 
         .status-dots {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .status-dot {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
 
         .dot.green {
             background: #00ff88;
-            box-shadow: 0 0 10px #00ff88;
+            box-shadow: 0 0 8px #00ff88;
         }
 
         .dot.red {
@@ -127,9 +137,11 @@
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 15px;
-            height: calc(100vh - 56px);
+            gap: 10px;
+            padding: 10px;
+            padding-bottom: 15px;
+            flex: 1;
+            overflow-y: auto;
         }
 
         .panel {
@@ -140,7 +152,7 @@
         }
 
         .panel-header {
-            padding: 12px 15px;
+            padding: 8px 12px;
             border-bottom: 1px solid #333;
             display: flex;
             justify-content: space-between;
@@ -148,21 +160,21 @@
         }
 
         .panel-title {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #5b9bd5;
         }
 
         .panel-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         .btn {
-            padding: 5px 12px;
+            padding: 4px 10px;
             border: none;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -197,58 +209,58 @@
 
         .panel-body {
             flex: 1;
-            padding: 15px;
+            padding: 10px;
             overflow-y: auto;
         }
 
         .sensor-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
         .sensor-card {
             background: #1a1d24;
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 6px;
+            padding: 12px;
             text-align: center;
         }
 
         .sensor-label {
-            font-size: 2rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #5b9bd5;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .sensor-value {
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: #fff;
         }
 
         .sensor-unit {
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: #888;
-            margin-left: 4px;
+            margin-left: 3px;
         }
 
         .sensor-name {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #666;
-            margin-top: 8px;
+            margin-top: 5px;
         }
 
         .threshold-section {
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .threshold-row {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 12px 0;
+            gap: 10px;
+            padding: 8px 0;
             border-bottom: 1px solid #333;
         }
 
@@ -257,22 +269,22 @@
         }
 
         .threshold-label {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #888;
-            width: 70px;
+            width: 60px;
         }
 
         .current-value {
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #00ff88;
-            min-width: 80px;
+            min-width: 60px;
         }
 
         .threshold-input-group {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             flex: 1;
         }
 
@@ -280,10 +292,10 @@
             background: #1a1d24;
             border: 1px solid #333;
             border-radius: 4px;
-            padding: 6px 10px;
+            padding: 4px 8px;
             color: #fff;
-            font-size: 0.9rem;
-            width: 70px;
+            font-size: 0.8rem;
+            width: 55px;
             text-align: center;
         }
 
@@ -297,10 +309,10 @@
             border: none;
             border-radius: 4px;
             color: #888;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -317,30 +329,31 @@
         }
 
         .actuator-section {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .valve-status {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 10px 15px;
+            gap: 15px;
+            padding: 8px 12px;
             background: #1a1d24;
             border-radius: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         .valve-label {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #888;
         }
 
         .valve-state {
             background: #00ff88;
             color: #1a1d24;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
             font-weight: 600;
         }
 
@@ -351,39 +364,68 @@
         .actuator-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 10px;
         }
 
         .actuator-card {
             background: #1a1d24;
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 6px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .actuator-icon {
-            font-size: 4rem;
-            opacity: 0.7;
+            font-size: 2.5rem;
+            opacity: 0.85;
+        }
+
+        .fan-blade {
+            width: 50px;
+            height: 50px;
+            animation: fan-spin 3s linear infinite;
+        }
+
+        .fan-blade.spinning {
+            animation: fan-spin 0.3s linear infinite;
+        }
+
+        @keyframes fan-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .light-bulb {
+            width: 40px;
+            height: 50px;
+        }
+
+        .light-bulb.on .bulb-glow {
+            fill: #ffd700;
+            filter: drop-shadow(0 0 8px #ffd700);
+        }
+
+        .light-bulb.on .bulb-glass {
+            fill: #fff9c4;
         }
 
         .actuator-name {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #fff;
         }
 
         .actuator-relay {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #666;
         }
 
         .actuator-switch {
             position: relative;
-            width: 50px;
-            height: 28px;
+            width: 44px;
+            height: 24px;
             cursor: pointer;
         }
 
@@ -400,17 +442,17 @@
             right: 0;
             bottom: 0;
             background: #3a4149;
-            border-radius: 14px;
+            border-radius: 12px;
             transition: 0.3s;
         }
 
         .actuator-slider:before {
             position: absolute;
             content: "";
-            height: 20px;
-            width: 20px;
-            left: 4px;
-            bottom: 4px;
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
             background: #666;
             border-radius: 50%;
             transition: 0.3s;
@@ -455,7 +497,7 @@
 
         .footer {
             background: #252a33;
-            padding: 10px 20px;
+            padding: 6px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -465,26 +507,26 @@
         .log-section {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .log-label {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #888;
         }
 
         .log-count {
             background: #5b9bd5;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.7rem;
             color: #fff;
         }
 
         .footer-switch {
             position: relative;
-            width: 45px;
-            height: 24px;
+            width: 40px;
+            height: 22px;
             cursor: pointer;
         }
 
@@ -501,15 +543,15 @@
             right: 0;
             bottom: 0;
             background: #3a4149;
-            border-radius: 12px;
+            border-radius: 11px;
             transition: 0.3s;
         }
 
         .footer-slider:before {
             position: absolute;
             content: "";
-            height: 18px;
-            width: 18px;
+            height: 16px;
+            width: 16px;
             left: 3px;
             bottom: 3px;
             background: #666;
@@ -523,21 +565,27 @@
         }
 
         input:checked + .footer-slider:before {
-            transform: translateX(21px);
+            transform: translateX(18px);
             background: #fff;
         }
 
         .debug-panel {
             position: fixed;
             bottom: 50px;
-            left: 0;
-            right: 0;
-            height: 300px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 900px;
+            max-width: 95%;
+            height: 200px;
+            max-height: 30vh;
             background: #1a1d24;
-            border-top: 1px solid #333;
+            border: 1px solid #333;
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
             display: none;
             flex-direction: column;
-            z-index: 1000;
+            z-index: 9999;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
         }
 
         .debug-panel.show {
@@ -648,6 +696,7 @@
     </style>
 </head>
 <body>
+    <div class="container">
     <div class="header">
         <div class="header-left">
             <div class="logo">PCT-100</div>
@@ -706,8 +755,8 @@
                     <div class="panel-title" style="margin-bottom: 15px; font-size: 0.85rem;">阈值设置</div>
                     <div class="threshold-row">
                         <span class="threshold-label">当前</span>
-                        <span class="current-value" id="temp-current">28 °C</span>
-                        <span class="threshold-label">温度阈值</span>
+                        <span class="current-value" id="temp-current">--.- °C</span>
+                        <span class="threshold-label">温度阈值(temp_threshold)</span>
                         <div class="threshold-input-group">
                             <input type="number" class="threshold-input" id="temp-threshold" value="30" min="0" max="100">
                             <label class="arrow-btn" onclick="adjustThreshold('temp-threshold', 1)">
@@ -719,8 +768,8 @@
                     </div>
                     <div class="threshold-row">
                         <span class="threshold-label">当前</span>
-                        <span class="current-value" id="light-current">300 Lux</span>
-                        <span class="threshold-label">光照阈值</span>
+                        <span class="current-value" id="light-current">---- Lux</span>
+                        <span class="threshold-label">光照阈值(light_threshold)</span>
                         <div class="threshold-input-group">
                             <input type="number" class="threshold-input" id="light-threshold" value="302" min="0" max="1000">
                             <label class="arrow-btn" onclick="adjustThreshold('light-threshold', 1)">
@@ -746,13 +795,19 @@
             </div>
             <div class="panel-body">
                 <div class="valve-status">
-                    <span class="valve-label">总阀</span>
+                    <span class="valve-label">总闸</span>
                     <span class="valve-state" id="valve-state">闭合</span>
                 </div>
 
                 <div class="actuator-grid">
                     <div class="actuator-card">
-                        <div class="actuator-icon">💡</div>
+                        <svg class="light-bulb" id="light-icon" viewBox="0 0 40 50">
+                            <rect class="bulb-base" x="12" y="42" width="16" height="6" rx="2" fill="#888"/>
+                            <rect class="bulb-thread" x="14" y="38" width="12" height="4" fill="#666"/>
+                            <circle class="bulb-glow" cx="20" cy="22" r="16" fill="#555"/>
+                            <ellipse class="bulb-glass" cx="20" cy="22" rx="12" ry="14" fill="#333"/>
+                            <path class="bulb-shine" d="M14 16 Q16 14 18 16" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none"/>
+                        </svg>
                         <div class="actuator-name">灯光</div>
                         <div class="actuator-relay">继电器3</div>
                         <label class="actuator-switch">
@@ -761,7 +816,14 @@
                         </label>
                     </div>
                     <div class="actuator-card">
-                        <div class="actuator-icon">🌀</div>
+                        <svg class="fan-blade" id="fan-icon" viewBox="0 0 50 50">
+                            <circle cx="25" cy="25" r="4" fill="#888"/>
+                            <circle cx="25" cy="25" r="2" fill="#555"/>
+                            <path class="blade" d="M25 8 Q30 20 25 25 Q20 20 25 8" fill="#5b9bd5" opacity="0.8"/>
+                            <path class="blade" d="M25 8 Q30 20 25 25 Q20 20 25 8" fill="#5b9bd5" opacity="0.8" transform="rotate(120 25 25)"/>
+                            <path class="blade" d="M25 8 Q30 20 25 25 Q20 20 25 8" fill="#5b9bd5" opacity="0.8" transform="rotate(240 25 25)"/>
+                            <circle cx="25" cy="25" r="22" stroke="#444" stroke-width="1" fill="none" opacity="0.3"/>
+                        </svg>
                         <div class="actuator-name">风扇</div>
                         <div class="actuator-relay">继电器4</div>
                         <label class="actuator-switch">
@@ -802,9 +864,9 @@
         var statusTimer = null;
         var logCount = 0;
         var mqttHost = "47.98.170.180";
-        var mqttPort = 8081;
-        var mqttUser = "dzdx_emqx";
-        var mqttPassword = "Jp4!sQ7$";
+        var mqttPort = 8083;
+        var mqttUser = "123";
+        var mqttPassword = "***";
         
         function addDebugLog(message, type = 'info') {
             const debugContent = document.getElementById('debug-content');
@@ -844,14 +906,19 @@
         }
 
         var deviceState = {
-            temperature: 26.9,
-            light: 492,
+            temperature: null,
+            light: null,
             mode: "auto",
             key1_lock: true,
             relay3: false,
             relay4: false,
-            temp_threshold: 30.0,
-            light_threshold: 302
+            temp_threshold: null,
+            light_threshold: null
+        };
+        
+        var localThresholds = {
+            temp: 30,
+            light: 300
         };
 
         function updateValue(elementId, min, max, decimals = 1) {
@@ -869,6 +936,13 @@
             let newValue = current + delta;
             newValue = Math.max(min, Math.min(max, newValue));
             input.value = newValue;
+            
+            // 更新本地阈值
+            if (inputId === 'temp-threshold') {
+                localThresholds.temp = newValue;
+            } else if (inputId === 'light-threshold') {
+                localThresholds.light = newValue;
+            }
         }
 
         function updateConnectionStatus(connected) {
@@ -898,7 +972,8 @@
             addDebugLog(`正在连接 MQTT 服务器 ${mqttHost}:${mqttPort} ...`, 'info');
             addDebugLog(`设备ID: ${deviceId}`, 'info');
             
-            client = new Paho.MQTT.Client(mqttHost, mqttPort, "/", getDeviceId());
+            // 尝试空路径，大多数WebSocket MQTT服务器使用空路径或/mqtt
+            client = new Paho.MQTT.Client(mqttHost, mqttPort, "", getDeviceId() + "_" + Date.now());
             
             client.onConnectionLost = function(responseObject) {
                 console.log("Connection lost:", responseObject.errorMessage);
@@ -991,6 +1066,8 @@
             message.destinationName = getCommandTopic();
             message.qos = 0;
             client.send(message);
+            addDebugLog(`发送状态查询到: ${getCommandTopic()}`, 'sent');
+            addDebugLog(`  内容: {"cmd":"get_status"}`, 'sent');
             console.log('Sent get_status command to:', getCommandTopic());
         }
 
@@ -1012,9 +1089,13 @@
                 if (topic === getStatusTopic()) {
                     updateDeviceState(data);
                     updateUI();
+                    // 收到设备消息，表明设备在线
+                    updateDeviceDot(true);
+                    addDebugLog('设备状态已更新，设备在线', 'success');
                 }
             } catch (e) {
                 console.error('Error parsing message:', e);
+                addDebugLog('解析消息失败: ' + e.message, 'error');
             }
         }
 
@@ -1032,12 +1113,55 @@
         }
 
         function updateUI() {
-            document.getElementById('temp-value').textContent = deviceState.temperature.toFixed(1);
-            document.getElementById('light-value').textContent = deviceState.light;
-            document.getElementById('temp-threshold').value = deviceState.temp_threshold;
-            document.getElementById('light-threshold').value = deviceState.light_threshold;
+            // 更新传感器数值显示
+            if (deviceState.temperature !== null && deviceState.temperature !== undefined) {
+                document.getElementById('temp-value').textContent = deviceState.temperature.toFixed(1);
+            } else {
+                document.getElementById('temp-value').textContent = '--.-';
+            }
+            
+            if (deviceState.light !== null && deviceState.light !== undefined) {
+                document.getElementById('light-value').textContent = deviceState.light;
+            } else {
+                document.getElementById('light-value').textContent = '----';
+            }
+
+            // 更新阈值输入框（显示本地设置的阈值，用于下发）
+            document.getElementById('temp-threshold').value = localThresholds.temp;
+            document.getElementById('light-threshold').value = localThresholds.light;
+
+            // 更新当前阈值显示（显示设备上报的阈值，实时更新）
+            if (deviceState.temp_threshold !== null && deviceState.temp_threshold !== undefined) {
+                document.getElementById('temp-current').textContent = deviceState.temp_threshold + ' °C';
+            } else {
+                document.getElementById('temp-current').textContent = '--.- °C';
+            }
+            
+            if (deviceState.light_threshold !== null && deviceState.light_threshold !== undefined) {
+                document.getElementById('light-current').textContent = deviceState.light_threshold + ' Lux';
+            } else {
+                document.getElementById('light-current').textContent = '---- Lux';
+            }
+
+            // 更新开关状态
             document.getElementById('light-switch').checked = deviceState.relay3;
             document.getElementById('fan-switch').checked = deviceState.relay4;
+
+            // 更新灯光SVG状态
+            const lightIcon = document.getElementById('light-icon');
+            if (deviceState.relay3) {
+                lightIcon.classList.add('on');
+            } else {
+                lightIcon.classList.remove('on');
+            }
+
+            // 更新风扇SVG旋转状态
+            const fanIcon = document.getElementById('fan-icon');
+            if (deviceState.relay4) {
+                fanIcon.classList.add('spinning');
+            } else {
+                fanIcon.classList.remove('spinning');
+            }
             
             if (deviceState.mode === 'auto') {
                 document.getElementById('mode-auto').click();
@@ -1079,22 +1203,43 @@
         });
 
         document.getElementById('light-switch').addEventListener('change', function() {
+            const lightIcon = document.getElementById('light-icon');
+            if (this.checked) {
+                lightIcon.classList.add('on');
+            } else {
+                lightIcon.classList.remove('on');
+            }
             if (!this.disabled && client && client.isConnected()) {
                 sendSetRelay(3, this.checked);
             }
         });
 
         document.getElementById('fan-switch').addEventListener('change', function() {
+            const fanIcon = document.getElementById('fan-icon');
+            if (this.checked) {
+                fanIcon.classList.add('spinning');
+            } else {
+                fanIcon.classList.remove('spinning');
+            }
             if (!this.disabled && client && client.isConnected()) {
                 sendSetRelay(4, this.checked);
             }
         });
 
+        document.getElementById('temp-threshold').addEventListener('change', function() {
+            localThresholds.temp = parseFloat(this.value);
+        });
+
         document.getElementById('temp-submit').addEventListener('click', function() {
             const value = parseFloat(document.getElementById('temp-threshold').value);
+            localThresholds.temp = value;
             if (client && client.isConnected()) {
                 sendSetThreshold(value, undefined);
             }
+        });
+
+        document.getElementById('light-threshold').addEventListener('change', function() {
+            localThresholds.light = parseFloat(this.value);
         });
 
         document.getElementById('light-submit').addEventListener('click', function() {
@@ -1115,6 +1260,31 @@
         document.getElementById('device-id-input').addEventListener('input', function() {
             this.value = this.value.replace(/\D/g, '').slice(0, 3);
         });
+
+        document.getElementById('log-switch').addEventListener('change', function() {
+            const panel = document.getElementById('debug-panel');
+            if (this.checked) {
+                panel.classList.add('show');
+            } else {
+                panel.classList.remove('show');
+            }
+        });
+
+        document.getElementById('debug-clear').addEventListener('click', function() {
+            document.getElementById('debug-content').innerHTML = '';
+            logCount = 0;
+            document.getElementById('log-count').textContent = '0';
+        });
+
+        // 初始化调试信息
+        addDebugLog('界面加载完成', 'success');
+        addDebugLog('MQTT WebSocket配置: ' + mqttHost + ':' + mqttPort, 'info');
+        addDebugLog('设备ID: ' + getDeviceId(), 'info');
+        addDebugLog('点击开关可连接MQTT服务器', 'warn');
+
+        // 初始化UI状态
+        updateUI();
     </script>
+    </div>
 </body>
 </html>
