@@ -19,6 +19,13 @@
             color: #fff;
         }
 
+        .page-wrapper {
+            transform: scale(0.5);
+            transform-origin: top left;
+            width: 200%;
+            min-height: 100vh;
+        }
+
         .header {
             background: #252a33;
             padding: 12px 20px;
@@ -646,6 +653,7 @@
     </style>
 </head>
 <body>
+    <div class="page-wrapper">
     <div class="header">
         <div class="header-left">
             <div class="logo">PCT-100</div>
@@ -1114,5 +1122,6 @@
             this.value = this.value.replace(/\D/g, '').slice(0, 3);
         });
     </script>
+    </div>
 </body>
 </html>
